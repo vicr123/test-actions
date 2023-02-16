@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [blueprint]
+    branches: [blueprint,master]
     tags:
       - 'v*'
   pull_request:
