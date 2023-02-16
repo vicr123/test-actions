@@ -19,6 +19,7 @@ jobs:
     - name: "Calculate Variables"
       id: vars
       run: |
+        echo "GITHUB_REF:" $GITHUB_REF
         if [[ $GITHUB_REF == "/refs/tags"* ]]; then
           echo "FLATPAK_REPO_NAME=stable" >> $GITHUB_OUTPUT
           echo "FLATPAK_MANIFEST=dist/com.vicr123.thebeat.yml" >> $GITHUB_OUTPUT
