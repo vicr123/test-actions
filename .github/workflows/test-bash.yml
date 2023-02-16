@@ -41,6 +41,8 @@ jobs:
         name: "test-artifact"
         path: "./artifact.txt"
   release:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     needs: flatpak-builder
     if: github.event_name == 'release'
