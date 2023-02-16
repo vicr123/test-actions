@@ -1,8 +1,8 @@
 on:
   push:
     branches: [blueprint,master]
-    tags:
-      - 'v*'
+  release:
+    types: [published]
   pull_request:
   workflow_dispatch:
 name: Build Flatpak
@@ -34,4 +34,24 @@ jobs:
       run: |
         echo "REPO_NAME: " $REPO_NAME
         echo "MANIFEST_PATH: " $MANIFEST_PATH
+        echo "HELLO WORLD" > artifact.txt
+    - uses: actions/upload-artifact@v3
+      name: "Upload Artifact"
+      with:
+        name: "test-artifact"
+        path: "./artifact.txt"
+  release:
+    runs-on: ubuntu-latest
+    needs: flatpak-builder
+    if: github.event_name == 'release'
+    steps:
+      - uses: actions/download-artifact@v3
+        name: "Download Artifact"
+        id: download
+        with:
+          name: "test-artifact"
+      - name: "Upload to Release"
+        uses: softprops/action-gh-release@v1
+        with:
+          files: artifact.txt
 
