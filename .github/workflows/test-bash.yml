@@ -1,0 +1,36 @@
+on:
+  push:
+    branches: [blueprint]
+    tags:
+      - 'v*'
+  pull_request:
+  workflow_dispatch:
+name: Build Flatpak
+jobs:
+  flatpak-builder:
+    name: "Flatpak Builder"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [x86_64]
+      # Don't fail the whole workflow if one architecture fails
+      fail-fast: false
+    steps:
+    - name: "Calculate Variables"
+      id: vars
+      run: |
+        if [[ $GITHUB_REF == "/refs/tags"* ]]; then
+          echo "FLATPAK_REPO_NAME=stable" >> $GITHUB_OUTPUT
+          echo "FLATPAK_MANIFEST=dist/com.vicr123.thebeat.yml" >> $GITHUB_OUTPUT
+        else
+          echo "FLATPAK_REPO_NAME=blueprint" >> $GITHUB_OUTPUT
+          echo "FLATPAK_MANIFEST=dist/com.vicr123.thebeat_blueprint.yml" >> $GITHUB_OUTPUT
+        fi
+    - shell: bash
+      env:
+        MANIFEST_PATH: ${{ steps.vars.outputs.FLATPAK_MANIFEST }}
+        REPO_NAME: ${{ steps.vars.outputs.FLATPAK_REPO_NAME }}
+        run: |
+          echo "REPO_NAME: " $REPO_NAME
+          echo "MANIFEST_PATH: " $MANIFEST_PATH
+
