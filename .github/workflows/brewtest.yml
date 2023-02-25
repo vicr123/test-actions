@@ -1,0 +1,12 @@
+name: "Test Brew"
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - run: |
+        brew install qt
+        ls /usr/local/lib
+        ls /usr/local/lib/cmake
