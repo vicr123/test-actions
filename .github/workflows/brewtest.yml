@@ -7,6 +7,6 @@ jobs:
     runs-on: macos-latest
     steps:
       - run: |
-        brew install qt
-        ls /usr/local/lib
-        ls /usr/local/lib/cmake
+          brew install qt
+          ls /usr/local/lib
+          ls /usr/local/lib/cmake
