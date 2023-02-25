@@ -11,3 +11,4 @@ jobs:
           brew link qt
           ls /usr/local/lib
           ls /usr/local/lib/cmake
+          readlink /usr/local/lib/QtCore.framework/Versions/A/QtCore
