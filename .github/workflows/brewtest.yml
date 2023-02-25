@@ -7,6 +7,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - run: |
+          export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
           brew install qt
           brew link qt
           ls /usr/local/lib
