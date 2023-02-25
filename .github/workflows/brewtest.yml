@@ -8,5 +8,6 @@ jobs:
     steps:
       - run: |
           brew install qt
+          brew link qt
           ls /usr/local/lib
           ls /usr/local/lib/cmake
