@@ -10,8 +10,8 @@ jobs:
     steps:
       - name: Test
         run: |
-          curl -L \
-          -H "Accept: application/vnd.github+json" \
-          -H "X-GitHub-Api-Version: 2026-03-10" \
-          -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-          https://api.github.com/user
+            curl -L \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2026-03-10" \
+              -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+              https://api.github.com/installation/repositories
