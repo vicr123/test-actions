@@ -7,11 +7,13 @@ on:
 jobs:
   go:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Test
         run: |
             curl -L \
               -H "Accept: application/vnd.github+json" \
               -H "X-GitHub-Api-Version: 2026-03-10" \
-              -H "Authorization: ${GITHUB_TOKEN}" \
+              -H "Authorization: $GH_TOKEN" \
               https://api.github.com/installation/repositories
